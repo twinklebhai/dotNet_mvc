@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Ecommerce.Models.OrderItem>
+
+@if (Model.Count() > 0)
+{
+    <h1>Order Details</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <h4>OrderId</h4>
+                </th>
+                <th>
+                    <h4>ItemId</h4>
+                </th>
+                <th>
+                    <h4>Amount</h4>
+                </th>
+                <th>
+                    <h4>Status</h4>
+                </th>
+
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ItemId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+
+
+                    <td>
+
+                        <a asp-action="Cancel" asp-route-id="@item.ItemId" class="btn btn-danger">Cancel</a>
+                    </td>
+                    <td>
+                        <a asp-action="Postpone" asp-route-id="@item.ItemId" class="btn btn-success">Postpone</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <form method="post">
+        <div class="form-group row">
+            <div class="col-4">
+                <label >Enter OrderId</label>
+            </div>
+            <div class="col-3">
+                <input name="Orderid" class="form-control" type="number" />
+
+            </div>
+            <div class="col-3">
+
+                <input type="submit" asp-action="Edit"  class="btn btn-primary form-control" />
+                
+            </div>
+
+        </div>
+    </form>
+}
